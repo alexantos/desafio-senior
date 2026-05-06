@@ -1,0 +1,44 @@
+<div class="flex flex-row justify-between">
+    <span class="text-4xl font-light">Vaga</span>
+    <button (click)="adicionarVaga()" [disabled]="!vaga.valid"
+        [ngClass]="vaga.valid ? 'bg-blue-800 hover:bg-blue-800': 'bg-blue-200'"
+        class=" text-white font-medium py-2 px-4 rounded cursor-pointer">
+        <span *ngIf="novo">
+            Adicionar
+        </span>
+        <span *ngIf="!novo">
+            Editar
+        </span>
+    </button>
+</div>
+<div class="p-10">
+    <form [formGroup]="vaga">
+        <mat-form-field appearance="fill" class="w-full">
+            <mat-label>Nome</mat-label>
+            <input matInput placeholder="Digite seu nome" formControlName="nome">
+            <mat-error *ngIf="vaga.controls['nome'].getError('pattern')">Nome inválido</mat-error>
+            <mat-error *ngIf="vaga.controls['nome'].getError('required')">Nome obrigatório</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="w-full">
+            <mat-label>Faixa salarial</mat-label>
+            <mat-select formControlName="faixa_salarial">
+                @for (faixa of faixa_salarial; track faixa) {
+                <mat-option [value]="faixa.value">{{faixa.descricao}}</mat-option>
+                }
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="w-full">
+            <mat-label>Requisitos</mat-label>
+            <input matInput placeholder="Digite os requisitos" formControlName="requisitos">
+            <mat-error *ngIf="vaga.controls['requisitos'].getError('required')">Requisitos obrigatório</mat-error>
+        </mat-form-field>
+                <mat-form-field appearance="fill" class="w-full">
+            <mat-label>Escolaridade</mat-label>
+            <mat-select formControlName="escolaridade_exigida">
+                @for (escolaridade of escolaridade_exigida; track escolaridade) {
+                <mat-option [value]="escolaridade.value">{{escolaridade.descricao}}</mat-option>
+                }
+            </mat-select>
+        </mat-form-field>
+    </form>
+</div>

@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Candidaturas } from './candidaturas';
+import { VagaComponent } from './vaga.ts';
 
-describe('Candidaturas', () => {
-  let component: Candidaturas;
-  let fixture: ComponentFixture<Candidaturas>;
+describe('VagaComponent', () => {
+  let component: VagaComponent;
+  let fixture: ComponentFixture<VagaComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Candidaturas]
+      imports: [VagaComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(Candidaturas);
+    fixture = TestBed.createComponent(VagaComponent);
     component = fixture.componentInstance;
-    await fixture.whenStable();
+    fixture.detectChanges();
   });
 
   it('should create', () => {

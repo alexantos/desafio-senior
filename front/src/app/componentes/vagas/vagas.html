@@ -1,0 +1,51 @@
+<div class="flex flex-col md:flex-row justify-between">
+    <span class="text-4xl pt-4 font-light">Vagas</span>
+    <div class="flex flex-col md:flex-row gap-6 items-start">
+        <mat-form-field appearance="fill">
+            <mat-label>Nome da vaga</mat-label>
+            <input matInput placeholder="Digite o nome" [formControl]="pesquisar">
+            <mat-icon matIconSuffix>search</mat-icon>
+        </mat-form-field>
+        <button class="bg-blue-800 hover:bg-blue-900 text-white font-medium py-2 px-4 mt-4 rounded cursor-pointer"
+            (click)="adicionarEditarVaga(0)">
+            Adicionar
+        </button>
+    </div>
+</div>
+@if(carregando) {
+<div class="flex flex-row justify-center">
+    <mat-spinner></mat-spinner>
+</div>
+}
+
+<div class="flex flex-col pt-4 gap-4">
+    @for(vaga of vagas(); track vaga.id){
+    <div class="flex flex-row bg-white rounded-2xl w-full py-4 px-6 gap-6">
+        <div class="flex flex-row w-1/12 items-center">
+            <div
+                class="flex flex-col w-10 h-10 md:w-14 md:h-14 xl:w-16 xl:h-16 bg-blue-800 rounded-full text-white text-xl md:text-2xl xl:text-3xl items-center justify-center">
+                {{ pegaIniciais(vaga.nome) }}
+            </div>
+        </div>
+        <div class="flex flex-col justify-center w-7/12  gap-1">
+            <div class="text-3xl font-normal">
+                {{vaga.nome}}
+            </div>
+        </div>
+        <div class="flex flex-row justify-end items-center w-4/12 gap-4">
+            <div>
+                <mat-icon class="cursor-pointer" (click)="adicionarEditarVaga(vaga.id)"
+                    matTooltip="Editar Vaga">edit</mat-icon>
+            </div>
+            <div>
+                <mat-icon class="cursor-pointer" (click)="deletarVaga(vaga)"
+                    matTooltip="Deletar vaga">delete</mat-icon>
+            </div>
+        </div>
+    </div>
+    } @empty {
+    <div class="flex flex-row justify-center text-2xl">
+        Não há vagas
+    </div>
+    }
+</div>
